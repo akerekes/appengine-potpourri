@@ -49,7 +49,7 @@
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <webResources>
                         <resource>
-                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <directory>${basedir}/src/main/webap/WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
                         </resource>
@@ -59,14 +59,15 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.2.2-SNAPSHOT</version>
                 <configuration>
-                    <appYamls>
-                        <appYaml>${project.build.directory}/appengine-staging/app.yaml</appYaml>
-                        <appYaml>
-                            ${project.parent.basedir}/jdo-backend/target/appengine-staging/app.yaml
-                        </appYaml>
-                    </appYamls>
+                    <services>
+                      <service>${project.build.directory}/${project.name}-${project.version}</service>
+                        <service>
+                          ${project.parent.basedir}/jdo-backend/target/jdo-backend-${project.version}
+                        </service>
+                      </services>
+                      <devserverVersion>2-alpha</devserverVersion>
                     <deploy.project>${appengineProjectName}</deploy.project>
                     <stage.enableJarClasses>false</stage.enableJarClasses>
                     <deploy.version>1</deploy.version>
